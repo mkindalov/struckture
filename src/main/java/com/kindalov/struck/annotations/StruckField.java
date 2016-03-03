@@ -9,8 +9,9 @@ import java.lang.annotation.Target;
  * TODO comment.
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface Structure {
-    int len() default 0;
-    boolean allowOverlap() default false;
+@Target(ElementType.FIELD)
+@StruckAnnotation
+public @interface StruckField {
+    int offset();
+    int size() default 0;
 }

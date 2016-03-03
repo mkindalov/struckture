@@ -7,9 +7,7 @@ import java.nio.ByteBuffer;
 /**
  * TODO comment.
  */
-public class ShortHandler implements Handler<Short> {
-
-    private int offset;
+public class ShortHandler extends ReversibleHandler<Short> {
 
     @Override
     public int getSize() {
@@ -17,13 +15,7 @@ public class ShortHandler implements Handler<Short> {
     }
 
     @Override
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    @Override
-    public Short getValue(byte[] data) {
-        ByteBuffer byteBuffer = ByteBuffer.wrap(data, offset, getSize());
+    public Short getValue(ByteBuffer byteBuffer) {
         return byteBuffer.getShort();
     }
 }

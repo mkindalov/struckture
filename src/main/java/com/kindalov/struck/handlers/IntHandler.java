@@ -1,14 +1,11 @@
 package com.kindalov.struck.handlers;
 
-import com.kindalov.struck.Handler;
-import com.kindalov.struck.helpers.ByteGetter;
+import java.nio.ByteBuffer;
 
 /**
  * TODO comment.
  */
-public class IntHandler implements Handler<Integer> {
-
-    private int offset;
+public class IntHandler extends ReversibleHandler<Integer> {
 
     @Override
     public int getSize() {
@@ -16,18 +13,7 @@ public class IntHandler implements Handler<Integer> {
     }
 
     @Override
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    @Override
-    public Integer getValue(byte[] data) {
-        byte[] bytes = ByteGetter.getBytes(data, offset, getSize(), true);
-        int result = 0;
-        for (int i = 0; i < getSize(); i++) {
-            result = result << 8;
-            result += bytes[i];
-        }
-        return result;
+    public Integer getValue(ByteBuffer byteBuffer) {
+        return byteBuffer.getInt();
     }
 }

@@ -7,9 +7,7 @@ import java.nio.ByteBuffer;
 /**
  * TODO comment.
  */
-public class FloatHandler implements Handler<Float> {
-
-    private int offset;
+public class FloatHandler extends ReversibleHandler<Float> {
 
     @Override
     public int getSize() {
@@ -17,13 +15,7 @@ public class FloatHandler implements Handler<Float> {
     }
 
     @Override
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    @Override
-    public Float getValue(byte[] data) {
-        ByteBuffer byteBuffer = ByteBuffer.wrap(data, offset, getSize());
+    public Float getValue(ByteBuffer byteBuffer) {
         return byteBuffer.getFloat();
     }
 }

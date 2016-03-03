@@ -10,8 +10,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Field {
-    int offset();
-    int size() default 0;
-    String length() default "";
+@StruckAnnotation
+public @interface BitPosition {
+    int value();
 }

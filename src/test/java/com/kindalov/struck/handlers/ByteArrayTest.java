@@ -2,9 +2,9 @@ package com.kindalov.struck.handlers;
 
 import com.kindalov.struck.Struck;
 import com.kindalov.struck.StruckTest;
-import com.kindalov.struck.annotations.Field;
+import com.kindalov.struck.annotations.Reverse;
+import com.kindalov.struck.annotations.StruckField;
 import com.kindalov.struck.annotations.Structure;
-import org.hamcrest.collection.IsArrayContaining;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -21,8 +21,11 @@ public class ByteArrayTest extends StruckTest {
 
     @Structure(len = 0x20)
     public static class ByteArrayTestStructure {
-        @Field(offset = 0x10, size = 5)
+        @StruckField(offset = 0x10, size = 5)
         private byte[] array;
+
+        @StruckField(offset = 0x18, size = 4) @Reverse
+        private byte[] reversed;
     }
 
     @Test
@@ -38,5 +41,20 @@ public class ByteArrayTest extends StruckTest {
 
         //then
         assertThat(structure.array, is(new byte[] {0x20, 0, 0, 0x10, 0}));
+    }
+
+    @Test
+    public void shouldReadByteArrayReversed() {
+        //given
+        InputStream stream = stream(
+                x(0x7, 0, 0, 0x10, 0, 0, 0, 0), x(0x7, 0, 0, 0x5, 0, 0, 0, 0),
+                x(0x20, 0, 0, 0x10, 0, 0, 0, 0), x(0x7, 0, 0, 0x5, 0, 0, 0, 0));
+        Struck<ByteArrayTestStructure> struck = Struck.forClass(ByteArrayTestStructure.class);
+
+        //when
+        ByteArrayTestStructure structure = struck.read(stream);
+
+        //then
+        assertThat(structure.reversed, is(new byte[] {0x5, 0, 0, 0x7}));
     }
 }

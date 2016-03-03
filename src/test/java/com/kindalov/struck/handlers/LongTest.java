@@ -2,7 +2,8 @@ package com.kindalov.struck.handlers;
 
 import com.kindalov.struck.Struck;
 import com.kindalov.struck.StruckTest;
-import com.kindalov.struck.annotations.Field;
+import com.kindalov.struck.annotations.Reverse;
+import com.kindalov.struck.annotations.StruckField;
 import com.kindalov.struck.annotations.Structure;
 import org.junit.Test;
 
@@ -18,10 +19,12 @@ public class LongTest extends StruckTest {
 
     @Structure(len = 0x20)
     public static class LongTestStructure {
-        @Field(offset = 0x0)
+        @StruckField(offset = 0x0)
         private Long wrapper;
-        @Field(offset = 0x14)
+        @StruckField(offset = 0x14)
         private long primitive;
+        @StruckField(offset = 0x18) @Reverse
+        private long reverse;
     }
 
     @Test
@@ -52,5 +55,20 @@ public class LongTest extends StruckTest {
 
         //then
         assertThat(s.primitive, is(0x0301000005l));
+    }
+
+    @Test
+    public void shouldReadLongReverse() {
+        //given
+        InputStream stream = stream(
+                x(0, 0, 0, 0x10, 0, 0, 0, 0), x(0, 0, 0, 0x5, 0, 0, 0, 0),
+                x(0x20, 0, 0, 0x10, 0, 0, 0, 0x03), x(0x1, 0, 0, 0x5, 0, 0, 0, 0));
+        Struck<LongTestStructure> struck = Struck.forClass(LongTestStructure.class);
+
+        //when
+        LongTestStructure s = struck.read(stream);
+
+        //then
+        assertThat(s.reverse, is(0x5000001l));
     }
 }

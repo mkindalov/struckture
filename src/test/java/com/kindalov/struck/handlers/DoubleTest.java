@@ -2,7 +2,8 @@ package com.kindalov.struck.handlers;
 
 import com.kindalov.struck.Struck;
 import com.kindalov.struck.StruckTest;
-import com.kindalov.struck.annotations.Field;
+import com.kindalov.struck.annotations.Reverse;
+import com.kindalov.struck.annotations.StruckField;
 import com.kindalov.struck.annotations.Structure;
 import org.junit.Test;
 
@@ -18,10 +19,12 @@ public class DoubleTest extends StruckTest {
 
     @Structure(len = 0x10)
     public static class DoubleTestStructure {
-        @Field(offset = 0)
+        @StruckField(offset = 0)
         private Double wrapper;
-        @Field(offset = 0x8)
+        @StruckField(offset = 0x8)
         private double primitive;
+        @StruckField(offset = 0x8) @Reverse
+        private double reverse;
     }
 
     @Test
@@ -52,5 +55,20 @@ public class DoubleTest extends StruckTest {
 
         //then
         assertThat(structure.primitive, is(1/3d));
+    }
+
+    @Test
+    public void shouldReadDoubleReverse() {
+        //given
+        InputStream stream = stream(
+                x(0, 0, 0, 0, 0, 0, 0, 0), x(0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0xd5, 0x3f),
+                x(0x3f, 0xd5, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55), x(0, 0, 0, 0, 0, 0, 0, 0));
+        Struck<DoubleTestStructure> struck = Struck.forClass(DoubleTestStructure.class);
+
+        //when
+        DoubleTestStructure structure = struck.read(stream);
+
+        //then
+        assertThat(structure.reverse, is(1/3d));
     }
 }

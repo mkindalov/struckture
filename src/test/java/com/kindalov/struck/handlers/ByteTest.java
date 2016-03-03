@@ -2,7 +2,7 @@ package com.kindalov.struck.handlers;
 
 import com.kindalov.struck.Struck;
 import com.kindalov.struck.StruckTest;
-import com.kindalov.struck.annotations.Field;
+import com.kindalov.struck.annotations.StruckField;
 import com.kindalov.struck.annotations.Structure;
 import org.junit.Test;
 
@@ -18,9 +18,9 @@ public class ByteTest extends StruckTest {
 
     @Structure(len = 0x20)
     public static class ByteTestStructure {
-        @Field(offset = 0x3)
+        @StruckField(offset = 0x3)
         private Byte wrapper;
-        @Field(offset = 0x10)
+        @StruckField(offset = 0x10)
         private byte primitive;
     }
 

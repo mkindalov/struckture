@@ -1,30 +1,45 @@
 package com.kindalov.struck.handlers;
 
-import com.kindalov.struck.Handler;
-import com.kindalov.struck.helpers.ByteGetter;
+import com.kindalov.struck.annotations.BitPosition;
 
+import java.lang.annotation.Annotation;
 import java.nio.ByteBuffer;
+import java.util.Set;
 
 /**
  * TODO comment.
  */
-public class BooleanHandler implements Handler<Boolean> {
+public class BooleanHandler extends ReversibleHandler<Boolean> {
 
-    private int offset;
+    private boolean isBitOriented = false;
+    private int position = 0;
+
+    @Override
+    public void init(Set<Annotation> annotations) {
+        super.init(annotations);
+        BitPosition bitPositionAnnotation = getAnnotation(BitPosition.class);
+        if (bitPositionAnnotation != null) {
+            isBitOriented = true;
+            position = bitPositionAnnotation.value();
+        }
+    }
+
+    private boolean isSet(byte b, int bit) {
+        return (b >> bit & 1) == 1;
+    }
+
+    @Override
+    public Boolean getValue(ByteBuffer byteBuffer) {
+        if (isBitOriented) {
+            return isSet(byteBuffer.get(), position);
+        } else {
+            return byteBuffer.get() > 0;
+        }
+
+    }
 
     @Override
     public int getSize() {
         return 1;
-    }
-
-    @Override
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
-    @Override
-    public Boolean getValue(byte[] data) {
-        byte[] bytes = ByteGetter.getBytes(data, offset, getSize(), true);
-        return bytes[0] > 0;
     }
 }

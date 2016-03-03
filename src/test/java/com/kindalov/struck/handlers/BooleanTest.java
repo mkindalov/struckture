@@ -2,7 +2,8 @@ package com.kindalov.struck.handlers;
 
 import com.kindalov.struck.Struck;
 import com.kindalov.struck.StruckTest;
-import com.kindalov.struck.annotations.Field;
+import com.kindalov.struck.annotations.BitPosition;
+import com.kindalov.struck.annotations.StruckField;
 import com.kindalov.struck.annotations.Structure;
 import org.junit.Test;
 
@@ -18,10 +19,14 @@ public class BooleanTest extends StruckTest {
 
     @Structure(len = 0x10)
     public static class BooleanTestStructure {
-        @Field(offset = 0x3)
+        @StruckField(offset = 0x3)
         private Boolean wrapper;
-        @Field(offset = 0xa)
+        @StruckField(offset = 0xa)
         private boolean primitive;
+        @StruckField(offset = 0xf) @BitPosition(3)
+        private boolean bit3;
+        @StruckField(offset = 0xf) @BitPosition(4)
+        private boolean bit4;
     }
 
     @Test
@@ -57,5 +62,22 @@ public class BooleanTest extends StruckTest {
         //then
         assertThat(structure1.primitive, is(false));
         assertThat(structure2.primitive, is(true));
+    }
+
+    @Test
+    public void shouldReadBits() {
+        //given
+        InputStream stream = stream(
+                x(0, 0, 0, 0x10, 0, 0, 0, 0), x(0, 0, 0, 0x5, 0, 0, 0, 0xf),
+                x(0x20, 0, 0, 0x10, 0, 0, 0, 0x03), x(0, 0, 0x1, 0x5, 0, 0, 0, 0));
+        Struck<BooleanTestStructure> struck = Struck.forClass(BooleanTestStructure.class);
+
+        //when
+        BooleanTestStructure structure = struck.read(stream);
+
+        //then
+        //then
+        assertThat(structure.bit3, is(true));
+        assertThat(structure.bit4, is(false));
     }
 }
