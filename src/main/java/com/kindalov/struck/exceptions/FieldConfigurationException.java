@@ -1,7 +1,7 @@
 package com.kindalov.struck.exceptions;
 
 /**
- * TODO comment.
+ * TODO comment test.
  */
 public class FieldConfigurationException extends StruckException {
     public FieldConfigurationException(String message) {
