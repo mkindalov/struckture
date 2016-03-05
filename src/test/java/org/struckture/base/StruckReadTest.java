@@ -29,7 +29,7 @@ public class StruckReadTest extends StrucktureTest {
     }
 
     @Test
-    public void shouldReadMoreTimes() {
+    public void shouldReadMoreStructuresFromStream() {
         //given
         InputStream stream = stream(
                 o(0x7, 0, 0, 0x10, 0, 0, 0, 0), o(0x7, 0, 0, 0x5, 0, 0, 0, 0),
@@ -40,14 +40,13 @@ public class StruckReadTest extends StrucktureTest {
         struck.read(stream);
         struck.read(stream);
 
-        //than everything is good
+        //then
+        //Yuppie no exception
     }
 
 
     @Test(expected = StrucktureReadException.class)
     public void shouldThrowExceptionWhenStreamEndAndHasUnreadData() {
-
-
         //given
         InputStream stream = stream(
                 o(0x7, 0, 0, 0x10, 0, 0, 0, 0), o(0x7, 0, 0, 0x5, 0, 0, 0, 0),
@@ -58,29 +57,24 @@ public class StruckReadTest extends StrucktureTest {
         struck.read(stream);
         struck.read(stream);
 
-        //then everything is good
+        //then
+        //expect exception
     }
 
     @Test
     public void shouldReturnNullForEndOfStreamAndNoUnreadData() {
-
-
         //given
         InputStream stream = stream(
                 o(0x7, 0, 0, 0x10, 0, 0, 0, 0), o(0x7, 0, 0, 0x5, 0, 0, 0, 0),
                 o(0x20, 0, 0, 0x10, 0, 0, 0, 0), o(0x7, 0, 0, 0x5, 0, 0, 0, 0));
         Struck<StruckTestStructure> struck = Strucktor.forClass(StruckTestStructure.class);
 
-        struck.read(stream);
-        struck.read(stream);
-
         //when
+        struck.read(stream);
+        struck.read(stream);
         StruckTestStructure structure = struck.read(stream);
 
         //than
         assertThat(structure, is(nullValue()));
     }
-
-
-
 }

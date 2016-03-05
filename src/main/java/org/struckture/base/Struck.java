@@ -9,8 +9,6 @@ import java.io.InputStream;
  * @param <T> the type of structures to read.
  *
  * The structure type must be annotated with {@link org.struckture.base.annotations.Struckture} annotation.
- *
- * TODO add example
  */
 public interface Struck<T> {
     /**

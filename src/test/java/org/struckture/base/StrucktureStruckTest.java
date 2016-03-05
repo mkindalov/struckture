@@ -32,8 +32,6 @@ public class StrucktureStruckTest extends StrucktureTest {
     @Test
     public void shouldNotSetNotAnnotatedField() {
         //given
-
-
         InputStream stream = stream(
                 o(0x7, 0, 0, 0x10, 0, 0, 0, 0), o(0x7, 0, 0, 0x5, 0, 0, 0, 0),
                 o(0x20, 0, 0, 0, 0, 0, 0, 0), o(0x7, 0, 0x1, 0x5, 0, 0, 0, 0));
@@ -60,7 +58,7 @@ public class StrucktureStruckTest extends StrucktureTest {
         Strucktor.forClass(NegativeOffsetTestStructure.class);
 
         //then
-
+        //expect exception
     }
 
     @Struckture(length = 0x5)
@@ -73,12 +71,11 @@ public class StrucktureStruckTest extends StrucktureTest {
     public void shouldNotAllowOutOfBoundsFields() {
         //given
 
-
         //when
         Strucktor.forClass(OutOfBoundsTestStructure.class);
 
         //then
-
+        //expect exception
     }
 
 
@@ -92,7 +89,6 @@ public class StrucktureStruckTest extends StrucktureTest {
     @Test
     public void shouldAllowOverlappingFieldsWhenOverlappingEnabled() {
         //given
-
 
         //when
         Struck<OverlappingWithAllowTestStructure> structure = Strucktor.forClass(OverlappingWithAllowTestStructure.class);
@@ -117,6 +113,7 @@ public class StrucktureStruckTest extends StrucktureTest {
         Strucktor.forClass(OverlappingTestStructure.class);
 
         //then
+        //expect exception
     }
 
     private static class NoAnnotationTestStructure {
@@ -132,6 +129,7 @@ public class StrucktureStruckTest extends StrucktureTest {
         Strucktor.forClass(NoAnnotationTestStructure.class);
 
         //then
+        //expect exception
     }
 
     @Struckture(length = -5)
@@ -149,7 +147,7 @@ public class StrucktureStruckTest extends StrucktureTest {
         Strucktor.forClass(NegativeLenTestStructure.class);
 
         //then
-        fail();
+        //expect exception
     }
 
 
@@ -170,6 +168,7 @@ public class StrucktureStruckTest extends StrucktureTest {
         Strucktor.forClass(NoConstructorTestStructure.class);
 
         //then
+        //expect exception
     }
 
     @Struckture(length = 0x8)
@@ -177,16 +176,16 @@ public class StrucktureStruckTest extends StrucktureTest {
         @StruckField(offset = 4)
         private Object object;
     }
+
     @Test(expected = FieldConfigurationException.class)
     public void shouldThrowExceptionWhenUnknownType() {
         //given
-
 
         //when
         Strucktor.forClass(UnknownTypeFieldTestStructure.class);
 
         //then
-        fail();
+        //expect exception
     }
 
     @Struckture(length = 0x8)
@@ -198,6 +197,7 @@ public class StrucktureStruckTest extends StrucktureTest {
             throw new NotImplementedException();
         }
     }
+
     @Test(expected = StrucktureReadException.class)
     public void shouldThrowExceptionWhenConstructorThrowsException() {
         //given
@@ -211,6 +211,6 @@ public class StrucktureStruckTest extends StrucktureTest {
         struck.read(stream);
 
         //then
-        fail();
+        //expect exception
     }
 }

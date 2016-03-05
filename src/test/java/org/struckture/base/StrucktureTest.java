@@ -10,6 +10,11 @@ import java.io.InputStream;
  */
 public abstract class StrucktureTest {
 
+    /**
+     * Creates a byte stream out of array of byte array.
+     * @param bytesList array of byte array
+     * @return input stream.
+     */
     protected InputStream stream(byte[]... bytesList) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
         for (byte[] bytes : bytesList) {
