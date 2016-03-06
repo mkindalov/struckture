@@ -84,7 +84,7 @@ public class StrucktureStruckTest extends StrucktureTest {
         @StruckField(offset = 4)
         private int integer;
         @StruckField(offset = 4, size = 4)
-        private byte bytes;
+        private byte[] bytes;
     }
     @Test
     public void shouldAllowOverlappingFieldsWhenOverlappingEnabled() {

@@ -8,6 +8,8 @@ import org.struckture.base.annotations.StruckField;
 import org.struckture.base.annotations.Struckture;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import static org.hamcrest.Matchers.is;
@@ -53,10 +55,10 @@ public class IntegerTest extends StrucktureTest {
         Struck<IntegerTestStructure> struck = Strucktor.forClass(IntegerTestStructure.class);
 
         //when
-        IntegerTestStructure s = struck.read(stream);
+        IntegerTestStructure structure = struck.read(stream);
 
         //then
-        assertThat(s.primitive, is(0x1000005));
+        assertThat(structure.primitive, is(0x1000005));
     }
 
     @Test
@@ -68,9 +70,9 @@ public class IntegerTest extends StrucktureTest {
         Struck<IntegerTestStructure> struck = Strucktor.forClass(IntegerTestStructure.class);
 
         //when
-        IntegerTestStructure s = struck.read(stream);
+        IntegerTestStructure structure = struck.read(stream);
 
         //then
-        assertThat(s.reverse, is(0x5000001));
+        assertThat(structure.reverse, is(0x5000001));
     }
 }
