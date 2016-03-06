@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
  */
 public class LongHandler extends ReversibleHandler<Long> {
 
-    private static final int BYTES_IN_LONG = 4;
+    private static final int BYTES_IN_LONG = 8;
 
     @Override
     public int getSize() {
