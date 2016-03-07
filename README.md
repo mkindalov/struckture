@@ -34,7 +34,7 @@ The structure to read must be annotated with `@Struckture` annotation with the `
 Struckture framework process a field only if it is annonated with `@StruckField`.
 ``` java
     @Struckture(length = 0x10)
-    private static class BooleanTestStructure {
+    private static class Structure {
         @StruckField(offset = 0x3)
         private int processed;
         
@@ -99,7 +99,7 @@ Encoding can be changed using `@StringEncoding()` annotation. Default encoding i
 When `@Struckture(allowOverlapping = true)` is used, the check if multiple fields depend on the same bytes is disabled, so same bytes can be used in different fields. In the next example bytes 4, 5, 6, 7 are used for the integer and byte[]
 ```java
     @Struckture(length = 0x8, allowOverlapping = true)
-    private static class OverlappingWithAllowTestStructure {
+    private static class OverlappingAllowedStructure {
         @StruckField(offset = 4)
         private int integer;
         @StruckField(offset = 4, size = 4)
