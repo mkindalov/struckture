@@ -1,5 +1,7 @@
 # Struckture - Binary structure reader for Java
 
+[![Circle CI](https://circleci.com/gh/mkindalov/struckture.svg?style=svg)](https://circleci.com/gh/mkindalov/struckture)
+
 ### Target
 This java framework is for those who want to read binary structures in java. Useful for reverse engineering of file formats.
 
@@ -62,7 +64,7 @@ The list goes like this:
 | `float` | 4 | `Float` | 4 |
 | `double` | 8 | `Double` | 8 |
 | `byte[]` | `size` attribute | `boolean[]` | `size` attribute |
-| `String` | Look at the [Strings section](#reading-strings) below|
+| `String` | Check the [strings section](#reading-strings)| | |
 
 #### `@Reverse`
 If `@Reverse` annotation is used then instead of **BigEndian** the value will be resolved as **LittleEndian**
