@@ -7,6 +7,7 @@
     <groupId>org.struckture</groupId>
     <artifactId>struckture-base</artifactId>
     <version>0.9-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <name>Struckture</name>
     <description>Binary structure reader for Java</description>
@@ -24,7 +25,9 @@
         <url>https://github.com/mkindalov/struckture</url>
     </scm>
 
-    <packaging>jar</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -40,4 +43,18 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
