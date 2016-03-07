@@ -1,14 +1,14 @@
 # Struckture - Binary structure reader for Java
 
 ### Target
-This java framework is for those who want to read binary structures in java. Usefull for reverse engeneering of file formats.
+This java framework is for those who want to read binary structures in java. Useful for reverse engineering of file formats.
 
 ### Licence
-[Appache Licence version 2](http://www.apache.org/licenses/LICENSE-2.0)
+[Apache Licence version 2](http://www.apache.org/licenses/LICENSE-2.0)
 
 ### Documentation
 #### Usage
-You need a annotated class representing the structure to read:
+You need an annotated class representing the structure to read:
 ``` java
     @Struckture(length = 10) 
     public class Structure {
@@ -25,13 +25,12 @@ The reading from file goes like this:
     while((structure = struck.read(stream)) != null) {
         //do something
     }
-    
 ```
 #### `@Struckture(length = 0x10)`
 The structure to read must be annotated with `@Struckture` annotation with the `length` in bytes specified. The framework then tries to read chunks of `length` bytes and resolve them into a structure.
 
 #### `@StruckField`
-Struckture framework process a field only if it is annonated with `@StruckField`.
+Struckture framework process a field only if it is annotated with `@StruckField`.
 ``` java
     @Struckture(length = 0x10)
     private static class Structure {
@@ -41,7 +40,7 @@ Struckture framework process a field only if it is annonated with `@StruckField`
         private int notProcessed; //always 0
     }
 ```
-`offset` is the only common attribute for all field mappings. It sets the possition(in bytes) of the read chunk from which to read the field. `(offest = 0)` means read from the start.
+`offset` is the only common attribute for all field mappings. It sets the position(in bytes) of the read chunk from which to read the field. `(offset = 0)` means read from the start.
 
 `size` attribute is optional and ignored if not needed. It is useful for reading bytes, bit arrays and strings.
 For example:
@@ -71,7 +70,7 @@ If `@Reverse` annotation is used then instead of **BigEndian** the value will be
         @StruckField(offset = 0x8) @Reverse
         private int reverse;
 ```
-This Annotation will infulence on all privitives and wrappers with size > 1 and byte[].
+This Annotation will influence on all primitives and wrappers with size > 1 and byte[].
 
 #### `@BitPosition`
 When reading `boolean` the value is resolved in the following way: `value = byte[offset] > 0`
@@ -81,12 +80,12 @@ If we want to get the value of a bit in that byte then we use `@BitPosition` ann
         @StruckField(offset = 0xa)
         private boolean trueIfByteGreaterThan0;
         @StruckField(offset = 0xf) @BitPosition(3)
-        private boolean trueIFbit3IsSet;
+        private boolean trueIfBit3IsSet;
 ```
 
 #### Reading Strings
 When reading strings `size` means `maxSize`. When reading `String` with size 5, the result will have length between 0 and 5.
-Encoding can be changed using `@StringEncoding()` annotation. Default encoding is **"ANSII"**
+Encoding can be changed using `@StringEncoding()` annotation. Default encoding is **"ASCII"**
 ```java
         @StruckField(offset = 0x2, size = 5)
         private String string;
