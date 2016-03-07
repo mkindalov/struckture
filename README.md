@@ -63,7 +63,7 @@ The list goes like this:
 | `float` | 4 | `Float` | 4 |
 | `double` | 8 | `Double` | 8 |
 | `byte[]` | `size` attribute | `boolean[]` | `size` attribute |
-| `String` | Look at the Strings section below|
+| `String` | Look at the [Strings section](#reading-strings) below|
 
 #### `@Reverse`
 If `@Reverse` annotation is used then instead of **BigEndian** the value will be resolved as **LittleEndian**
