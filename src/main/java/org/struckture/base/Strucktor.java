@@ -123,7 +123,7 @@ public class Strucktor<T> implements Struck<T> {
         }
 
         for (Field field : type.getDeclaredFields()) {
-            StruckField struckFieldAnnotation = field.getDeclaredAnnotation(StruckField.class);
+            StruckField struckFieldAnnotation = field.getAnnotation(StruckField.class);
             if (struckFieldAnnotation != null) {
                 Handler<?> handler = getValidHandler(field, dataLength);
                 field.setAccessible(true);
