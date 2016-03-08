@@ -11,11 +11,14 @@
 
     <name>Struckture</name>
     <description>Binary structure reader for Java</description>
+    <url>https://github.com/mkindalov/struckture</url>
 
     <developers>
         <developer>
             <name>Marjan Kindalov</name>
             <email>marjan.kindalov@gmail.com</email>
+            <organization>mkindalov</organization>
+            <organizationUrl>https://github.com/mkindalov</organizationUrl>
         </developer>
     </developers>
 
