@@ -1,7 +1,8 @@
 # Struckture - Binary structure reader for Java
 
+TODO evaluate CI
 [![Circle CI](https://circleci.com/gh/mkindalov/struckture.svg?style=svg)](https://circleci.com/gh/mkindalov/struckture)
-
+[![Build Status](https://travis-ci.org/mkindalov/struckture.svg?branch=master)](https://travis-ci.org/mkindalov/struckture)
 ### Target
 This java framework is for those who want to read binary structures in java. Useful for reverse engineering of file formats.
 
