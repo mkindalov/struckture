@@ -4,7 +4,7 @@
 
     <groupId>org.struckture</groupId>
     <artifactId>struckture-base</artifactId>
-    <version>0.9.1</version>
+    <version>0.9.2-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Struckture</name>
@@ -24,7 +24,7 @@
         <connection>scm:git:git://github.com/mkindalov/struckture.git</connection>
         <developerConnection>scm:git:git@github.com:mkindalov/struckture.git</developerConnection>
         <url>https://github.com/mkindalov/struckture</url>
-      <tag>struckture-base-0.9.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
